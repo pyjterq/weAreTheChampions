@@ -14,6 +14,9 @@ const database = getDatabase(application)
 const endorsementsListInDatabase = ref(database, "endorsements")
 
 addButtonEl.addEventListener("click", function () {
+  if  (inputEndorsementEl.value === "") {
+    return
+  }
   let endorsement = inputEndorsementEl.value
   push(endorsementsListInDatabase, endorsement) 
   clearInputEndorsementEl()
@@ -28,11 +31,6 @@ onValue(endorsementsListInDatabase, function (snapshot) {
     let currentEndorsement = endorsementsArray[i]
     appendEndorsementsEl(currentEndorsement)
   }
-  // for (let i = 0; i < endorsementsArray.length; i++) {
-  //   let currentEndorsement = endorsementsArray[i]
-  //   appendEndorsementsEl(currentEndorsement)
-  
-  //    }
 }
 )
 function appendEndorsementsEl(endorsement) {

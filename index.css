@@ -78,6 +78,7 @@ h2 {
 #endorsement {
   margin: 1.4rem;
   width: 100%;
+  text-align: center;
 }
 #endorsement:before {
   content:  "\2043";
