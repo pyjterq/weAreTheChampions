@@ -89,10 +89,10 @@ h2 {
 #endorsements {
   list-style: none;
   width: 100%;
-  height: 200px;
+  /* height: 200px; */
   margin: 0;
   padding: 0;
-  overflow: scroll;
+  /* overflow: scroll; */
 }
 #endorsements li {
   color: #1B1924;
@@ -101,5 +101,4 @@ h2 {
   margin: 1rem 0;
   border-radius: 8px;
   padding: .5em;  
-  /* width: 100%;  */
 }
