@@ -1,23 +1,24 @@
-// javascript
-// https://wechempins-default-rtdb.europe-west1.firebasedatabase.app/
+// imports
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
-import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+import { getDatabase, ref, push, onValue, update } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 const appSettings = {
   databaseURL: "https://wechempins-default-rtdb.europe-west1.firebasedatabase.app/"
 }
+// HTML elements
 const inputEndorsementEl = document.getElementById("input-endorsement")
 const addButtonEl = document.getElementById("add-button")
 const endorsementsEl = document.getElementById("endorsements")
 const fromEl = document.getElementById("from")
 const toEl = document.getElementById("to") 
-const counterEl = document.getElementsByClassName("counter-number")
-
+// Firebase
 const application = initializeApp(appSettings)
 const database = getDatabase(application)
 const endorsementsListInDatabase = ref(database, "endorsements")
-
+//
 addButtonEl.addEventListener("click", function () {
-  if  (inputEndorsementEl.value === "") {
+  if  (inputEndorsementEl.value === "" && 
+  fromEl.value === "" && 
+  toEl.value === "") {
     return
   }
   let endorsement = inputEndorsementEl.value
@@ -26,29 +27,29 @@ addButtonEl.addEventListener("click", function () {
   let  message = { 
     endorsement: endorsement,
     from: from, 
-    to:to,
-    counter: 0,
+    to:to
   }
-  console.log(message)  
   push(endorsementsListInDatabase, message) 
   clearInputEndorsementEl()
   }
 )  
 
 onValue(endorsementsListInDatabase, function (snapshot) {
-  let endorsementsArray = Object.values(snapshot.val())
+  let endorsementsArray = Object.entries(snapshot.val())
   
   clearEndorsementsEl()
   for (let i = endorsementsArray.length - 1; i >= 0; i--) {
     let currentEndorsement = endorsementsArray[i]
     appendEndorsementsEl(currentEndorsement)
+    // console.log(currentEndorsement)
   }
 }
 )
-function appendEndorsementsEl(endorsement) {
+function appendEndorsementsEl(messageVal) {
   let newEL = document.createElement("div")
   newEL.classList.add("endorsement-content")
-
+  let idVal = messageVal[0]
+  let  endorsement = messageVal[1]
   let fromVal = endorsement.from
   let toVal = endorsement.to
   let endorsementVal = endorsement.endorsement
@@ -56,13 +57,17 @@ function appendEndorsementsEl(endorsement) {
 
   newEL.innerHTML = `<p class="messengers">To ${toVal}</p>
                      <p class="endorsement-message">${endorsementVal}</p>
-                     <div id="endorsement-counter">
-                        <p class="messengers">From ${fromVal}</p>
-                        <p class="counter"><span class="counter-number">${counterVal}</span> &#10084;</p>
-                     </div>`  
+                        <p class="messengers">From ${fromVal}</p>`  
   endorsementsEl.append(newEL)
 }
 
+endorsementsEl.addEventListener("click", function (event) {
+  if (event.target.className === "counter") {
+    console.log(event.target.id)
+    likeEndorsement(event.target.id)
+  } }
+
+)
 
 
 function clearInputEndorsementEl() {
@@ -77,9 +82,3 @@ function clearEndorsementsEl() {
   toEl.value = ""
 }
 
-counterEl.addEventListener("click", function () {
-    let counterNumber = counterEl.innerHTML
-    counterNumber++
-    counterEl.innerHTML = counterNumber
-  }
-)

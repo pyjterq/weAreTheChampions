@@ -124,7 +124,7 @@ h2 {
   margin-top: 0;
 }
 
-.messengers, .endorsement-message, .counter {
+.messengers, .endorsement-message, .endorsement-content {
   color: #1B1924;
   font-size: 1.4rem;
 }
@@ -133,6 +133,9 @@ h2 {
 }
 .messengers, .counter {
   margin: 0;
+}
+.counter{
+  cursor: pointer; 
 }
 .endorsement-message {
   margin: 1rem 0;
