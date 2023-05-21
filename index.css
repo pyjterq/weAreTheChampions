@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&family=Josefin+Sans:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Josefin+Sans:wght@700&display=swap');
 
 :root {
     font-size: 62.5%;
@@ -18,23 +18,29 @@ html, body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 2rem;
 
 }
 #input-endorsement {
   color: #8F8F8F;
   font-size: 1.5rem;
   display: flex;
-  /* width: 100%; */
-  /* height: 118px; */
-  padding: 10px;
+  width: 100%;
   background: #444059;
   border-radius: 8px;
   border: none;
 }
+#input-endorsement::placeholder,
+#input-endorsement::-webkit-input-placeholder 
+{
+  padding: 1rem;
+}
+
+#input-endorsement::-moz-placeholder {
+  padding: 1rem;
+}
 
 img {
-  margin: 5rem 0 1.7rem;
+  margin: 5rem 0 0;
   height: 90px;
   width: 90px;
 }
@@ -42,7 +48,7 @@ h1, h2 {
   color: #fff;
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 700;
-  margin: 0;
+  margin: 2rem;
   padding: 0;
 }
 h1 {
@@ -76,8 +82,6 @@ h2 {
   transform: translateY(4px);
 }
 #endorsement {
-  margin: 1.4rem;
-  width: 100%;
   text-align: center;
 }
 #endorsement:before {
@@ -86,19 +90,56 @@ h2 {
 #endorsement:after {
   content: "\2043";
 }
+#from-to {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  margin: 1rem 0;
+}
+#from, #to {
+  font-family: 'Inter';
+  font-size: 1.5rem;
+  min-width: 0;
+  line-height: 1.8rem;
+  padding: 0.5em 0;
+  text-align: center;
+  background: #444059;
+  color: #8F8F8F;
+  border: none;
+  border-radius: 8px;
+}
 #endorsements {
   list-style: none;
   width: 100%;
-  /* height: 200px; */
   margin: 0;
   padding: 0;
-  /* overflow: scroll; */
 }
-#endorsements li {
-  color: #1B1924;
-  font-size: 1.6rem;
+.endorsement-content {
   background-color: #fff;
   margin: 1rem 0;
   border-radius: 8px;
-  padding: .5em;  
+  padding: 1em;  
+}
+.endorsement-content:first-child {
+  margin-top: 0;
+}
+
+.messengers, .endorsement-message, .counter {
+  color: #1B1924;
+  font-size: 1.4rem;
+}
+.messengers {
+  font-weight: 700;
+}
+.messengers, .counter {
+  margin: 0;
+}
+.endorsement-message {
+  margin: 1rem 0;
+}
+#endorsement-counter {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0 !important;
 }
